@@ -5,11 +5,11 @@ const Footer = () => {
         <footer>
             <div>
                 Contact us
-                <span>
-                    <i className='fa fa-twitter' />
-                    <i className='fa fa-youtube-play' />
-                    <i className='fa fa-facebook' />
-                </span>
+                <div className='sm-block'>
+                    <i className='fa fa-twitter sm-icon' />
+                    <i className='fa fa-youtube-play sm-icon' />
+                    <i className='fa fa-facebook sm-icon' />
+                </div>
             </div>
             <div className='copyright'>
                 <span>Terms &amp; Conditions. Privacy Policy</span>

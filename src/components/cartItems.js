@@ -35,36 +35,34 @@ const Cart = () => {
 
     useEffect(() => {
         let total = 0
-        cart.map(item => {
+        cart.forEach(item => {
             const price = item.price
             const quantity = item.quantity
             const totalPrice = price * quantity
             total += totalPrice
-            return false;
         })
         setTotal(total)
     }, [cart])
 
     const increaseQuantity = (index) => {
-        const newQuantity = cart[index].quantity + 1;
-        data[index].quantity = newQuantity
-        setCart(data)
-        console.log(cart[index])
+        const newCart = [...cart];
+        newCart[index].quantity++;
+        setCart(newCart);
     }
 
     const decreaseQuantity = (index) => {
-        const newQuantity = cart[index].quantity - 1;
-        data[index].quantity = newQuantity
-        console.log(cart[index])
-        setCart(data)
-        console.log(cart[index])
-        // console.log(cart)
+        const newCart = [...cart]
+         if (newCart[index].quantity > 1) {
+            newCart[index].quantity--;
+            setCart(newCart);
+        } 
+        return false;
     }
 
-    const removeItem = (index) => {
-        data.filter(id => id - 1 === index)
-        console.log(index)
-        console.log(data)
+    const removeItem = (id) => {
+        const newCart = [...cart].filter(item => item.id !== id )
+        setCart(newCart)
+
     }
 
     return(
@@ -75,7 +73,7 @@ const Cart = () => {
                 let totalPrice = cartItem.price * cartItem.quantity
                 return (
                     <div className='cartItem-row' key={index}>
-                        <i className="fa fa-times remove-icon icon" onClick={() => removeItem(index)}/>
+                        <i className="fa fa-times remove-icon icon" onClick={() => removeItem(cartItem.id)}/>
                         <div className='cartItem'>
                             <div className='cartItem-info'>
                                 <img src={cartItem.imageSrc} alt='product-img' />

@@ -16,7 +16,7 @@ const Nav = ({className}) => {
                 </span>
                 <i className='fa fa-bars' onClick={() => toggleNav()} />
             </div>
-            <ul className={hide ? 'line' : 'hide'}>
+            <ul className={hide ? 'hide' : 'line'}>
                 <li><NavLink to='/cart' className={className}>Cart</NavLink></li>
                 <li>Login</li>
                 <li className='register'>Sign up</li>

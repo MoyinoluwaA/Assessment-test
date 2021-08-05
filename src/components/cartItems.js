@@ -30,34 +30,52 @@ const data = [
 
 const Cart = () => {
     const [cart, setCart] = useState(data)
+    const [deliveryPrice] = useState(1200)
     const [total, setTotal] = useState(0)
 
-    // useEffect(() => {
+    useEffect(() => {
+        let total = 0
+        cart.map(item => {
+            const price = item.price
+            const quantity = item.quantity
+            const totalPrice = price * quantity
+            total += totalPrice
+            return false;
+        })
+        setTotal(total)
+    }, [cart])
 
-    // }, [cart])
+    const increaseQuantity = (index) => {
+        const newQuantity = cart[index].quantity + 1;
+        data[index].quantity = newQuantity
+        setCart(data)
+        console.log(cart[index])
+    }
 
-    // const increaseQuantity = (index) => {
-    //     console.log(cart[index])
-    //     const newQuantity = cart[index].quantity + 1;
-    //     console.log(newQuantity)
-    //     data[index].quantity = newQuantity
-    //     console.log(data)
-    //     setCart(data)
-    //     console.log(cart)
-    // }
+    const decreaseQuantity = (index) => {
+        const newQuantity = cart[index].quantity - 1;
+        data[index].quantity = newQuantity
+        console.log(cart[index])
+        setCart(data)
+        console.log(cart[index])
+        // console.log(cart)
+    }
 
-    // const decreaseQuantity = (id) => {
-    //     console.log(cart)
-    // }
+    const removeItem = (index) => {
+        data.filter(id => id - 1 === index)
+        console.log(index)
+        console.log(data)
+    }
 
     return(
         <div className='cart'>
             <p><span className='disabled'>Home <i className='fa fa-angle-right' /> </span>Cart</p>
             <h2>Cart</h2>
             {cart.map((cartItem, index) => {
+                let totalPrice = cartItem.price * cartItem.quantity
                 return (
                     <div className='cartItem-row' key={index}>
-                        <i className="fa fa-times remove-icon icon" />
+                        <i className="fa fa-times remove-icon icon" onClick={() => removeItem(index)}/>
                         <div className='cartItem'>
                             <div className='cartItem-info'>
                                 <img src={cartItem.imageSrc} alt='product-img' />
@@ -66,17 +84,17 @@ const Cart = () => {
                                     <p className='quantity-block'>
                                         <i className="fa fa-plus-square-o icon" 
                                         aria-hidden="true" 
-                                        // onClick={() => increaseQuantity(index)}
+                                        onClick={() => increaseQuantity(index)}
                                         />
                                         <span className='quantity'>{cartItem.quantity}</span>
                                         <i className="fa fa-minus-square-o icon" 
                                         aria-hidden="true" 
-                                        // onClick={() => decreaseQuantity()}
+                                        onClick={() => decreaseQuantity(index)}
                                         />
                                     </p>
                                 </div>
                             </div>
-                            <p className='price'>#{cartItem.price * cartItem.quantity}</p>
+                            <p className='price'>#{totalPrice}</p>
                         </div>
                     </div>
                 )
@@ -88,12 +106,12 @@ const Cart = () => {
                         <img src={Scooter} alt='product-img' />
                         <h3 className='ml'>Delivery fee</h3>
                     </div>
-                    <p className='price'>#1200</p>
+                    <p className='price'>#{deliveryPrice}</p>
                 </div>
 
                 <div className='total'>
                     <p>Total</p>
-                    <p>{total}</p>
+                    <p>{total + deliveryPrice}</p>
                 </div>
             </section>
 

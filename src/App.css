@@ -68,7 +68,7 @@ h1 {
 
 #interests {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 #interests div {
@@ -84,7 +84,7 @@ h1 {
 }
 
 #interests p {
-  font-size: 15px;
+  font-size: 16px;
 }
 
 #interests div:first-of-type {
@@ -120,6 +120,15 @@ h1 {
 
 footer {
   padding: 30px;
+}
+
+footer div:first-of-type {
+  text-align: center;
+}
+
+.copyright {
+  display: flex;
+  justify-content: space-between;
 }
 
 .cart {
